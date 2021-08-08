@@ -5,13 +5,19 @@ var isValid = function(s) {
         //check if a closer matches the last char in a stack
     //if finish loop then return true
     const stack = [];
+    const cache = {
+        '(':')',
+        '[':']',
+        '{':'}'
+    };
     for (let i = 0; i < s.length; i++) {
-        if (s[i] === '(') stack.push(')');
-        else if (s[i] === '{') stack.push('}');
-        else if (s[i] === '[') stack.push(']');
+        if (cache[s[i]]) stack.push(cache[s[i]]);
         else if (s[i] !== stack[stack.length - 1]) return false;
         else stack.pop();
     }
     if (stack.length) return false;
     return true;
 };
+
+//top 99.66% speed
+//top 80% space
